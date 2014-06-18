@@ -15,9 +15,12 @@ RUN chmod +x /opt/warsow_15/wsw_server*
 RUN useradd -m -s /bin/bash warsow
 RUN chown -R warsow:warsow /opt/warsow_15
 
+# Copy server config into place
+RUN cp /opt/wsw_cfg/dedicated_autoexec.cfg /opt/warsow_15/basewsw/
+
 # Setup server
 WORKDIR /opt/warsow_15
 USER warsow
 EXPOSE 44400/udp
 
-CMD ./wsw_server +set fs_usehomedir 0 +set fs_basepath /opt/warsow_1.51/ +set dedicated 1
+CMD ./wsw_server +set fs_usehomedir 0 +set fs_basepath /opt/warsow_15/ +set dedicated 1
